@@ -12,27 +12,35 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
-        <li><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
+        <li><a href="#">Home <span class="sr-only">(current)</span></a></li>
+        <li><a *ngIf="!isLoggedIn" (click)="loginGoogle()">Login</a></li>
+        <li><a *ngIf="isLoggedIn" (click)="logout()">Logout</a></li>
 
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-      </ul>
+
     </div>
   </div>
 </nav>
 
-<div class="jumbotron">
+<!-- Shows when user is logged out -->
+<div *ngIf="!isLoggedIn" class="jumbotron">
   <div class="container">
     <h1>Todo App</h1>
     <p>This is a simple task manager, built upon Angular 4 and Firebase.</p>
-    <p><a class="btn btn-primary btn-lg">Try It Now!</a></p>
+    <p><a class="btn btn-primary btn-lg" (click)="loginGoogle()">Login With Google</a></p>
   </div>
 </div>
 
+<!-- When user is logged in -->
+<div *ngIf="isLoggedIn" class="jumbotron">
+  <div *ngIf="(authService.user | async)?.uid" class="container">
+    <h1>Welcome, {{(authService.user | async)?.displayName }}!</h1>
+    <p>I'm here to help you keep track of all your memos.</p>
+  </div>
+</div>
 
-<div class="container">
+<!-- Shows only when user is logged in -->
+<div *ngIf="isLoggedIn" class="container">
   <div class="form-group">
     <!-- <label class="control-label" for="focusedInput">Focused input</label> -->
     <input class="form-control" id="todo focusedInput" type="text" placeholder="What do you need to do?" (keyup.enter)="saveTodo($event.target.value)" [(ngModel)]="msgVal" />

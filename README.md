@@ -4,11 +4,9 @@ Just created this app for the purpose of understanding the latest changes to ang
 
 ## What's next?
 
-Add in Firebase auth functionality
+Add in Firebase auth functionality (Done)
+- Still need to make it show only current user data.
 
-# Data2
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
 ## Development server
 
